@@ -20,4 +20,27 @@ The site’s owner goals:
 - The owner wants to be able to save a specific book to his profile for later reference or update on reviews.
 - The owner wants to have a section that shows what books are the most reviewed on the website.
 
+### Scope Plane
+The features that the website should include:
+- [] Database cluster for books.
+- [] Database with user accounts.
+- [] Registration form.
+- [] Login form.
+- [] Landing page.
+- [] Library page.
+- [] User page.
+- [] Contact page.
+- [] User book review input form.
+- [] Ability to create new review.
+- [] Ability to edit and update review.
+- [] Ability to read reviews.
+- [] Ability to delete review.
+
+
+
+
+
+
+
+
  
