@@ -71,9 +71,11 @@ The site will conatin 7 pages:
 - Nav bar will contain website logo.
 - Nav menu on the phone will be activated by clicking on a burger icon.
 
+### Surface
 
+Website color pallete:
 
-
+![review site color pallete](assets/img/book-review-colorpallete.png)
 
 
 
