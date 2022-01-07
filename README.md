@@ -36,6 +36,26 @@ The features that the website should include:
 - [] Ability to read reviews.
 - [] Ability to delete review.
 
+### Structure Plane
+The information architutre:
+- Flow of information should be clear and consistent through out the design.
+
+The interaction design:
+- When user opens the landing page for the first time he will be informed about what Book Review website is, and what value can website provide to him or her.
+- The landing page should also conatin visuals in form of images that clearly convay the meaning that this is a website that has something to do with books.
+- The landing page should contain call-to-action to invoke a lead.
+- Library page will conatin a preview of all the books that can be found in the database.
+- Books should be displayed in the librery using bootstrap cards where each card will contain an image and preview text.
+- User can open each book in librery by clicking on the card.
+- User page should contain information that the user has provided when he signed up.
+- User should be able to view his saved books on his user page.
+- Only register users will be able to leave a review.
+- Review will contain one input field and submit button.
+- Contact page will contain conatact information and email form.
+- Contact information should conatin owners phone and email address.
+
+
+
 
 
 
