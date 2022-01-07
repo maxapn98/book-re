@@ -54,6 +54,25 @@ The interaction design:
 - Contact page will contain conatact information and email form.
 - Contact information should conatin owners phone and email address.
 
+### Sceleton plane
+The site will conatin 7 pages:
+- Homepage
+- Registration page
+- Login page
+- Library page
+- User page
+- Book page
+- Contact page
+
+#### Navigation
+- User will be able to navigate the website using websites' navigation. 
+- User page will only be made avalible to the user if he is loged in.
+- Nav bar will be contain buttons for login or logout, and registration.
+- Nav bar will contain website logo.
+- Nav menu on the phone will be activated by clicking on a burger icon.
+
+
+
 
 
 
