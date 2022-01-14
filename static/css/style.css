@@ -1,3 +1,20 @@
-h1{
-    color: blue;
+:root{
+    --dark-brown: #562c2c;
+    --light-bague: #f5dfbb;
+}
+
+.bg-brown{
+    background-color: var(--dark-brown);
+}
+
+.text-color{
+    color: var(--light-bague);
+}
+
+.navbar-light .navbar-brand {
+    color: var(--light-bague);
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: var(--light-bague);
 }
