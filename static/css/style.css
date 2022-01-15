@@ -18,3 +18,22 @@
 .navbar-light .navbar-nav .nav-link {
     color: var(--light-bague);
 }
+
+.fab {
+    font-size: 20px;
+    color: var(--light-bague);
+}
+
+.footer {
+    background-color: var(--dark-brown);
+    color: var(--light-bague);
+}
+
+a {
+    color: var(--light-bague);
+    text-decoration: none;
+}
+
+a:hover {
+    color: black;
+}
