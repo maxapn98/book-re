@@ -1,6 +1,13 @@
 :root{
     --dark-brown: #562c2c;
     --light-bague: #f5dfbb;
+    --dark-bague : #A67674;
+    --black-01: #001219;
+    --khaki : #B6AD90;
+}
+
+.text-dark {
+    color: var(--black-01)
 }
 
 .bg-brown{
@@ -37,3 +44,10 @@ a {
 a:hover {
     color: black;
 }
+.btn-lg {
+    background-color: var(--light-bague);
+}
+.btn:hover {
+    background-color: var(--dark-brown);
+}
+
