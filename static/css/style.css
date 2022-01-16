@@ -51,3 +51,7 @@ a:hover {
     background-color: var(--dark-brown);
 }
 
+.jumbotron {
+    background-color: var(--khaki);
+    height: 100%;
+}
