@@ -21,6 +21,14 @@ def contactpage():
     return render_template("contact.html")
 
 
+@app.route('/library')
+def librarypage():
+    """
+    Returns library page
+    """
+    return render_template("library.html")
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
