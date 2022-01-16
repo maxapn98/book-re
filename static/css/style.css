@@ -26,6 +26,10 @@
     color: var(--light-bague);
 }
 
+.nav-item{
+    padding: 3px;
+}
+
 .fab {
     font-size: 20px;
     color: var(--light-bague);
