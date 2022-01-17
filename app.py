@@ -29,6 +29,14 @@ def librarypage():
     return render_template("library.html")
 
 
+@app.route('/login')
+def loginpage():
+    """
+    Returns login page
+    """
+    return render_template("login.html")
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
