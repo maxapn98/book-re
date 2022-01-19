@@ -63,3 +63,8 @@ a:hover {
 textarea{
     resize:none
 }
+
+.alert-success {
+    color:  var(--black-01);
+    background-color: var(--khaki);
+}
