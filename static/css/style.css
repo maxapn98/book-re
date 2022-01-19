@@ -46,14 +46,28 @@ a {
 }
 
 a:hover {
-    color: black;
+    color: #000;
 }
 .btn-lg {
     background-color: var(--light-bague);
 }
 .btn:hover {
     background-color: var(--dark-brown);
+    color: #ffff;
 }
+
+.hero-btn{
+    border: 2px solid #001219;
+    color: #001219;
+}
+
+.btn-primary:hover {
+    border-color: #001219;
+}
+
+.btn-outline-primary {
+    color: var(--black-01);
+    border: none;}
 
 .jumbotron {
     background-color: var(--khaki);
@@ -67,4 +81,26 @@ textarea{
 .alert-success {
     color:  var(--black-01);
     background-color: var(--khaki);
+}
+.hero {
+    background-size: cover;
+    background-image: url("https://cdn.pixabay.com/photo/2021/01/21/16/49/books-5937823_960_720.jpg");
+    position: relative;
+    z-index: 1;
+}
+
+/*.hero::after {
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--khaki);
+    opacity: 30%;
+    z-index: 3;
+}
+*/
+.hero > .container{
+    
 }

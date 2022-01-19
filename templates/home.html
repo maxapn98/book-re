@@ -1,39 +1,41 @@
 {% extends 'index.html' %}
 {%  block content %}
 <!--Hero section-->
-<div class="container-fluid">
-    <div class="container">
-        <div class="px-4 py-5 mb-5 text-center">
-            <h1 class="display-5 fw-bold mt-5">Welcome to our library</h1>
-            <div class="col-lg-6 mx-auto">
-                <p class="lead mb-4">Here you can find our library section</p>
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                <a href="{{ url_for('librarypage') }}">
-                    <button type="button"class="btn btn-outline-secondary btn-lg px-4 gap-3 center text-dark">Library</button>
-                </a>
+<div class="container-fluid hero">
+    <div class="row">
+        <div class="col-12">
+            <div class="px-4 py-5 mb-5 text-center">
+                <h1 class="display-5 fw-bold mt-5">Welcome to our library</h1>
+                <div class="col-lg-6 mx-auto">
+                    <p class="lead mb-4">Here you can find our library section</p>
+                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <a href="{{ url_for('librarypage') }}">
+                        <button type="button"class="btn btn-primary btn-lg px-4 gap-3 hero-btn">Library</button>
+                    </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <!--Jumbotron section-->
-    <div class="container">
-        <div class="row align-items-md-stretch">
-            <div class="col-12 col-md-6 my-5">
-                <div class="text-white jumbotron p-5 rounded-lg m-3">
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="my-5">
+                <div class="jumbotron p-5 rounded-lg m-3">
                     <h2>Search for a book?</h2>
                     <div class="input-group">
                         <input class="form-control mb-0" placeholder="Search for a book" type="search">
-                        <button class="btn btn-outline-secondary bg-brown text-color" type="submit">Search</button>
+                        <button class="btn btn-outline-primary btn-lg " type="submit">Search</button>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6 my-5">
-                <div class="jumbotron p-4 rounded-lg m-4">
-                    <h2 class="text-center">Let others see your review</h2>
-                    <h4 class="text-end">Fill out register form</h4>
-                    <div class="d-grid mt-4">
-                        <button type="button" class="btn btn-lg">Register</button>
-                    </div>
+        </div>
+        <div class="col-12 col-md-6 my-5">
+            <div class="jumbotron p-4 rounded-lg mx-4">
+                <h2 class="text-center">Let others see your review</h2>
+                <h4 class="text-center">Fill out register form</h4>
+                <div class="d-grid mt-4">
+                    <button type="button" class="btn btn-lg">Register</button>
                 </div>
             </div>
         </div>
