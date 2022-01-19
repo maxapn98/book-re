@@ -87,20 +87,33 @@ textarea{
     background-image: url("https://cdn.pixabay.com/photo/2021/01/21/16/49/books-5937823_960_720.jpg");
     position: relative;
     z-index: 1;
+    background-position: right;
 }
 
-/*.hero::after {
-    
+.hero::after {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--khaki);
-    opacity: 30%;
-    z-index: 3;
+    background-color: #f5dfbb;
+    opacity: 0.4;
+    z-index: 2;
+    content: "";
 }
-*/
+
+.container-fluid.hero > div.row {
+    z-index: 3;
+    position: relative;
+}
+
+
+@media(min-width: 768px){
+    .hero {
+        background-position: initial;
+    }
+}
+
 .hero > .container{
     
 }
