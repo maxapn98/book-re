@@ -11,6 +11,9 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!--Static Css-->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!--Extrajs-->
+    {% block extra_js %}
+    {% endblock %}
 </head>
 
 <body>
