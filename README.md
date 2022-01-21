@@ -23,13 +23,13 @@ The site’s owner goals:
 ### Scope Plane
 The features that the website should include:
 - [] Database cluster for books.
-- [] Database with user accounts.
-- [] Registration form.
-- [] Login form.
-- [] Landing page.
+- [x] Database with user accounts.
+- [x] Registration form.
+- [x] Login form.
+- [x] Landing page.
 - [] Library page.
 - [] User page.
-- [] Contact page.
+- [x] Contact page.
 - [] User book review input form.
 - [] Ability to create new review.
 - [] Ability to edit and update review.
