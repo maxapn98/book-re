@@ -134,7 +134,11 @@ textarea{
     background-size: cover;
     background-image: url("https://cdn.pixabay.com/photo/2021/01/21/16/49/books-5937823_960_720.jpg");
     position: relative;
-    background-position: right;  
+    background-position: right; 
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media(min-width: 768px){
