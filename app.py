@@ -44,6 +44,13 @@ def librarypage():
     return render_template("library.html")
 
 
+@app.route('/profile/<username>, methods=["GET", "POST"]')
+def profilepage(username):
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+    return render_template("profile.html",username=username)
+
+
 @app.route('/login', methods=["GET", "POST"])
 def loginpage():
     if request.method == "POST":
@@ -56,7 +63,10 @@ def loginpage():
             if check_password_hash(
                 existing_user["password"], request.form.get("password")):
                     session["user"] = request.form.get("username").lower()
-                    flash("Welcome, {}".format(request.form.get("username")))
+                    flash("Welcome, {}".format(
+                        request.form.get("username")))
+                    return redirect(url_for(
+                        'profilepage', username=session["user"]))
             else:
                 # invalid password match
                 flash("Incorrect Username and/or Password")
@@ -91,6 +101,7 @@ def registerpage():
         # put the new user into 'session' cookie
         session["user"] = request.form.get("username").lower()
         flash("Registration Successful!")
+        return redirect(url_for('profilepage', username=session["user"]))
     return render_template("register.html")
 
 
