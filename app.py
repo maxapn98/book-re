@@ -97,8 +97,32 @@ def book_page(book_id):
     """
     Returns book page
     """
+    book_reviews = mongo.db.reviews.find({"_book_id": ObjectId(book_id)})
     book = mongo.db.books.find_one({"_id": ObjectId(book_id)})
-    return render_template('book-page.html', book=book)
+    if session.get('user'):
+        user = mongo.db.users.find_one({"_id": ObjectId(session['user']["_id"])})
+        del user["password"]
+    else:
+        user = None
+    return render_template('book-page.html', book=book, reviews=book_reviews, user=user)
+
+
+@app.route("/add_book_review/<book_id>", methods=["POST", "GET"])
+def add_book_review(book_id):
+    if request.method == "POST":
+        user = session['user']
+
+        book_review = {
+            "username": user["username"],
+            "_user_id": ObjectId(user["_id"]),
+            "_book_id": ObjectId(book_id),
+            "context": request.form.get("reviewComment"),
+        }
+
+        mongo.db.reviews.insert_one(book_review)
+        return redirect(url_for("book_page", book_id=book_id))
+    
+    return redirect(url_for("book_page", book_id=book_id))
 
 
 @app.route('/profile/<username>', methods=["GET", "POST"])
