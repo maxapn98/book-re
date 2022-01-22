@@ -11,6 +11,33 @@
                 <p>{{book.bookDesc}}</p>
             </div>
         </div>
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center mb-5">Review Section</h2>
+            </div>
+            {% if session.user %}
+            <div class="col-12">
+                <form action="" class="w-100">
+                    <div class="form-group">
+                        <label for="reviewComment" class="mb-2 fs-3">Leave your review</label>
+                        <textarea class="form-control" rows="8" name="reviewComment" id="reviewComment"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-lg mt-3">Submit Review</button>
+                    </div>
+                </form>
+            </div>
+            {% endif %}
+            <div class="col-12">
+                <div class="row p-3">
+                    <div class="col-12 p-4 mt-3 shadow rounded bg-white">
+                        <h4>User Name</h4>
+                        <hr>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil provident nemo eum explicabo magnam, beatae, quis soluta esse veniam illo commodi necessitatibus quo modi expedita enim ipsam, quisquam tenetur. Corrupti?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
