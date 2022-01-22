@@ -2,9 +2,10 @@ from crypt import methods
 import os
 from flask import (
     Flask, flash, render_template,
-    redirect, request, session, url_for)
+    redirect, request, session, url_for, jsonify)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from bson.json_util import dumps, loads
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env
@@ -102,10 +103,11 @@ def book_page(book_id):
 
 @app.route('/profile/<username>', methods=["GET", "POST"])
 def profilepage(username):
-    username = mongo.db.users.find_one({"username": session["user"]})["username"]
+    user = mongo.db.users.find_one({"_id": ObjectId(session["user"]["_id"])})
+    del user['password']
 
     if session['user']:
-        return render_template("profile.html",username=username)
+        return render_template("profile.html",user=user)
         
     return redirect(url_for('login'))
 
@@ -121,18 +123,16 @@ def logout():
 def loginpage():
     if request.method == "POST":
         # check if username exists in db
-        existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()})
+        existing_user = mongo.db.users.find_one({"username": request.form.get("username").lower()})
 
         if existing_user:
             # ensure hashed password matches user input
-            if check_password_hash(
-                existing_user["password"], request.form.get("password")):
-                    session["user"] = request.form.get("username").lower()
-                    flash("Welcome, {}".format(
-                        request.form.get("username")))
-                    return redirect(url_for(
-                        'profilepage', username=session["user"]))
+            if check_password_hash(existing_user["password"], request.form.get("password")):
+                    del existing_user["password"]
+                    existing_user["_id"] = str(existing_user["_id"])
+                    session["user"] = loads(dumps(existing_user))
+                    flash("Welcome, {}".format(request.form.get("username")))
+                    return redirect(url_for('profilepage', username=session["user"]))
             else:
                 # invalid password match
                 flash("Incorrect Username and/or Password")
@@ -151,8 +151,7 @@ def loginpage():
 def registerpage():
     if request.method == "POST":
         # check if username already exists in db
-        existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()})
+        existing_user = mongo.db.users.find_one({"username": request.form.get("username").lower()})
 
         if existing_user:
             flash("Username already exists")
@@ -162,11 +161,14 @@ def registerpage():
             "username": request.form.get("username").lower(),
             "password": generate_password_hash(request.form.get("password"))
         }
-        
+
         mongo.db.users.insert_one(register)
+        new_user = mongo.db.users.find_one({"username": register["username"]})
+        del new_user["password"]
+        new_user['_id'] = str(new_user['_id'])
 
         # put the new user into 'session' cookie
-        session["user"] = request.form.get("username").lower()
+        session["user"] = loads(dumps(new_user))
         flash("Registration Successful!")
         return redirect(url_for('profilepage', username=session["user"]))
     return render_template("register.html")
