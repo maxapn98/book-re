@@ -62,6 +62,7 @@ def add_book():
 
     return render_template("add-book.html")
 
+
 @app.route("/delete_book/<book_id>", methods=["GET","POST"])
 def delete_book(book_id):
     """
@@ -69,6 +70,25 @@ def delete_book(book_id):
     """
     mongo.db.books.delete_one({"_id": ObjectId(book_id)})
     return redirect(url_for("librarypage"))
+
+
+@app.route("/update_book/<book_id>", methods=["GET", "POST"])
+def update_book(book_id):
+    """
+    Update book information
+    """
+    if request.method == "POST":
+        updated_book = {
+            "bookName": request.form.get("bookName").lower(),
+            "bookImgUrl": request.form.get("bookImgUrl"),
+            "bookDesc": request.form.get("bookDesc"),
+            }
+
+        mongo.db.books.update_one({"_id": ObjectId(book_id)}, {"$set": updated_book})
+        return redirect(url_for("librarypage"))
+
+    book = mongo.db.books.find_one({"_id": ObjectId(book_id)})
+    return render_template("update-book.html", book=book)
 
 
 @app.route('/profile/<username>', methods=["GET", "POST"])

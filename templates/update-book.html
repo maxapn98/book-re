@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="lib-wrapper d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-12 col-sm-5 col-md-6 bg-color-kh p-5 shadow">
+                <h1 class="text-center">Update Book</h1>
+                <form method="POST" role="form" action="{{ url_for('update_book', book_id=book._id) }}">
+                    <div class="form-group mt-3">
+                        <label for="bookName" class="fs-5">Book Name</label>
+                        <input type="text" name="bookName" class="form-control" value="{{ book.bookName }}" required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="bookImgUrl" class="fs-5">Book Image Url</label>
+                        <input type="text" name="bookImgUrl" class="form-control" value="{{book.bookImgUrl}}" required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="bookDesc" class="fs-5">Book Description</label>
+                        <textarea type="text" name="bookDesc" class="form-control" rows="10" required>{{ book.bookDesc }}</textarea>
+                    </div>
+                    <div class="form-group mt-3">
+                        <button class="btn btn-lg w-100" type="submit">Update Book</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

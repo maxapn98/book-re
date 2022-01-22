@@ -37,8 +37,8 @@
                       <h5 class="card-title fs-3 mb-3 text-capitalize">{{ book.bookName }}</h5>
                       <p class="card-text">{{book.bookDesc}}</p>
                       <a href="#" class="btn btn-lg mt-auto card-button">View more</a>
-                      <a href="{{ url_for('delete_book', book_id=book._id)}}" class="d-none btn btn-danger card-edit-button fw-bold mt-auto mb-3">Delete Book</a>
-                      <a href="" class="d-none btn btn-info text-white fw-bold card-edit-button">Update Book Info</a>
+                      <a href="{{ url_for('delete_book', book_id=book._id) }}" class="d-none btn btn-danger card-edit-button fw-bold mt-auto mb-3">Delete Book</a>
+                      <a href="{{ url_for('update_book', book_id=book._id) }}" class="d-none btn btn-info text-white fw-bold card-edit-button">Update Book Info</a>
                     </div>
                 </div>
             </div>
