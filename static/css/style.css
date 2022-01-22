@@ -14,6 +14,14 @@
     background-color: var(--dark-brown);
 }
 
+.bg-light-bague{
+    background-color: var(--light-bague);
+}
+
+.bg-dark-bague{
+    background-color: var(--dark-bague);
+}
+
 .text-color{
     color: var(--light-bague);
 }
@@ -29,29 +37,6 @@
 .nav-item{
     padding: 3px;
 }
-
-.bg-light-bague{
-    background-color: var(--light-bague);
-}
-
-.bg-dark-bague{
-    background-color: var(--dark-bague);
-}
-/* Library */
-
-.lib-wrapper {
-    background-size: cover;
-    background-image: url("https://cdn.pixabay.com/photo/2021/01/21/16/49/books-5937823_960_720.jpg");
-    position: relative;
-    z-index: 1;
-    background-position: right;
-    min-height: 100vh;
-}
-
-@media(min-width: 768px){
-    .lib-wrapper {
-        background-position: initial;
-    }
 
 .fab {
     font-size: 20px;
@@ -165,14 +150,43 @@ textarea{
     align-items: center;
 }
 
-
-
 @media(min-width: 768px){
     .hero {
         background-position: initial;
     }
 }
 
-.hero > .container{
-    
+/* Library */
+
+.lib-wrapper {
+    background-size: cover;
+    background-image: url("https://cdn.pixabay.com/photo/2021/01/21/16/49/books-5937823_960_720.jpg");
+    position: relative;
+    z-index: 1;
+    background-position: right;
+    min-height: 100vh;
+}
+
+@media(min-width: 768px){
+    .lib-wrapper {
+        background-position: initial;
+    }
+}
+
+.card-title {
+    max-width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.card-text {
+    max-height: 100px;
+    overflow: hidden;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
 }

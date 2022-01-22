@@ -1,3 +1,4 @@
+from crypt import methods
 import os
 from flask import (
     Flask, flash, render_template,
@@ -41,13 +42,30 @@ def librarypage():
     """
     Returns library page
     """
-    return render_template("library.html")
+    return render_template("library.html", books=mongo.db.books.find())
 
 
-@app.route('/profile/<username>, methods=["GET", "POST"]')
+@app.route("/add_book", methods=["GET", "POST"])
+def add_book():
+    """
+    Returns add_book page
+    """
+    
+    if request.method == "POST":
+        new_book = {
+            "bookName": request.form.get("bookName").lower(),
+            "bookImgUrl": request.form.get("bookImgUrl"),
+            "bookDesc": request.form.get("bookDesc"),
+            }
+        mongo.db.books.insert_one(new_book)
+        return redirect(url_for("librarypage"))
+
+    return render_template("add-book.html")
+
+
+@app.route('/profile/<username>', methods=["GET", "POST"])
 def profilepage(username):
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
+    username = mongo.db.users.find_one({"username": session["user"]})["username"]
 
     if session['user']:
         return render_template("profile.html",username=username)
@@ -107,6 +125,7 @@ def registerpage():
             "username": request.form.get("username").lower(),
             "password": generate_password_hash(request.form.get("password"))
         }
+        
         mongo.db.users.insert_one(register)
 
         # put the new user into 'session' cookie
@@ -120,4 +139,3 @@ if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
             debug=True)
-

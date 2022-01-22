@@ -1,6 +1,6 @@
 {% extends 'index.html' %}
 {%  block content %}
-<div class="lib-wrapper pt-5">
+<div class="lib-wrapper py-5">
     <div class="container p-5 shadow bg-color-kh">
         <div class="row">
             <div class="col-12 my-5 text-center">
@@ -8,7 +8,7 @@
                 <h3 class="mt-3">Here you can check for available books in library</h3>
                 <!--Search bar-->
                 <div class="row justify-content-center align-items-center">
-                    <div class="col-6">
+                    <div class="col-12 col-md-6">
                         <form class="input-group mt-5">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Search for a book">
@@ -20,18 +20,24 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
+            <div class="col-12 d-flex">
+                <a href="{{ url_for('add_book') }}" class="btn btn-lg mx-auto">Add Book</a>
+            </div>
+        </div>
+        <div class="row align-items-stretch">
+            {% for book in books %}
+            <div class="col-12 col-lg-4 mt-5">
+                <div class="card h-100 d-flex">
+                    <img src="{{ book.bookImgUrl }}" class="card-img-top" alt="...">
                     <div class="card-body d-flex flex-column">
-                      <h5 class="card-title">Book title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-lg">View more</a>
+                      <h5 class="card-title fs-3 mb-3 text-capitalize">{{ book.bookName }}</h5>
+                      <p class="card-text">{{book.bookDesc}}</p>
+                      <a href="#" class="btn btn-lg mt-auto">View more</a>
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
     </div>
 </div>
-<!--Cards-->
 {% endblock %}
