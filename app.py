@@ -125,6 +125,16 @@ def add_book_review(book_id):
     return redirect(url_for("book_page", book_id=book_id))
 
 
+@app.route("/delete_book_review/<review_id>", methods=["POST", "GET"])
+def delete_book_review(review_id):
+    user_id = ObjectId(session['user']['_id'])
+    review = mongo.db.reviews.find_one({'_id': ObjectId(review_id)})
+    if user_id == review["_user_id"]:
+        mongo.db.reviews.delete_one(review)
+    
+    return redirect(url_for('book_page', book_id=review["_book_id"]))
+
+
 @app.route('/profile/<username>', methods=["GET", "POST"])
 def profilepage(username):
     user = mongo.db.users.find_one({"_id": ObjectId(session["user"]["_id"])})

@@ -36,8 +36,8 @@
                         <hr>
                         <p>{{review.context}}</p>
                         {% if user._id == review._user_id %}
-                            <a href="" class="btn btn-lg">Delete</a>
-                            <a href="" class="btn btn-lg">Update</a>
+                            <a href="{{ url_for('delete_book_review', review_id=review._id) }}" class="btn me-2 btn-danger">Delete</a>
+                            <a href="" class="btn btn-info">Update</a>
                         {% endif %}                        
                     </div>
                     {% endfor %}
