@@ -62,6 +62,14 @@ def add_book():
 
     return render_template("add-book.html")
 
+@app.route("/delete_book/<book_id>", methods=["GET","POST"])
+def delete_book(book_id):
+    """
+    Delete book from mongoDB
+    """
+    mongo.db.books.delete_one({"_id": ObjectId(book_id)})
+    return redirect(url_for("librarypage"))
+
 
 @app.route('/profile/<username>', methods=["GET", "POST"])
 def profilepage(username):

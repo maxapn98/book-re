@@ -1,4 +1,7 @@
 {% extends 'index.html' %}
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/library.js')}}"></script>
+{% endblock %}
 {%  block content %}
 <div class="lib-wrapper py-5">
     <div class="container p-5 shadow bg-color-kh">
@@ -21,7 +24,8 @@
         </div>
         <div class="row">
             <div class="col-12 d-flex">
-                <a href="{{ url_for('add_book') }}" class="btn btn-lg mx-auto">Add Book</a>
+                <a href="{{ url_for('add_book') }}" class="btn btn-lg ms-auto me-3">Add Book</a>
+                <button id="editToggler" class="btn btn-lg me-auto me-3">Edit Books</button>
             </div>
         </div>
         <div class="row align-items-stretch">
@@ -32,7 +36,9 @@
                     <div class="card-body d-flex flex-column">
                       <h5 class="card-title fs-3 mb-3 text-capitalize">{{ book.bookName }}</h5>
                       <p class="card-text">{{book.bookDesc}}</p>
-                      <a href="#" class="btn btn-lg mt-auto">View more</a>
+                      <a href="#" class="btn btn-lg mt-auto card-button">View more</a>
+                      <a href="{{ url_for('delete_book', book_id=book._id)}}" class="d-none btn btn-danger card-edit-button fw-bold mt-auto mb-3">Delete Book</a>
+                      <a href="" class="d-none btn btn-info text-white fw-bold card-edit-button">Update Book Info</a>
                     </div>
                 </div>
             </div>
