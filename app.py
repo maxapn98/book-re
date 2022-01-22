@@ -91,6 +91,15 @@ def update_book(book_id):
     return render_template("update-book.html", book=book)
 
 
+@app.route("/book/<book_id>")
+def book_page(book_id):
+    """
+    Returns book page
+    """
+    book = mongo.db.books.find_one({"_id": ObjectId(book_id)})
+    return render_template('book-page.html', book=book)
+
+
 @app.route('/profile/<username>', methods=["GET", "POST"])
 def profilepage(username):
     username = mongo.db.users.find_one({"username": session["user"]})["username"]

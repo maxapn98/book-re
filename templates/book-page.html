@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class="lib-wrapper py-5">
+    <div class="container bg-color-kh">
+        <div class="row">
+            <div class="col-12 col-md-6 mt-5 mb-5 d-flex justify-content-center align-items-center">
+                <img src="{{ book.bookImgUrl }}" class="book-img img-fluid" alt="">
+            </div>
+            <div class="col-12 col-md-6 mt-0 mt-md-5 mb-5 d-flex flex-column justify-content-center">
+                <h1 class="text-capitalize mb-5">{{book.bookName}}</h1>
+                <p>{{book.bookDesc}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

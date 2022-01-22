@@ -190,3 +190,17 @@ textarea{
     height: 280px;
     object-fit: cover;
 }
+
+.book-img {
+    height: 300px;
+}
+
+.navbar-toggler {
+    padding: 0.25rem 0.75rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    background-color: #f5dfbb;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    transition: box-shadow .15s ease-in-out;
+}
