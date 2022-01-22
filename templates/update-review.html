@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="lib-wrapper d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-12 col-sm-5 col-md-6 bg-color-kh p-5 shadow">
+                <h1 class="text-center">Update Review</h1>
+                <form method="POST" role="form" action="{{ url_for('update_book_review', review_id=review._id) }}">
+                    <div class="form-group mt-3">
+                        <label for="reviewText" class="fs-5 mb-3">Review Text</label>
+                        <textarea name="reviewText" class="form-control" required>{{ review.context }}</textarea>
+                    </div>
+                    <div class="form-group mt-3">
+                        <button class="btn btn-lg w-100" type="submit">Update Review</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
