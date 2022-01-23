@@ -23,10 +23,12 @@
             <div class="my-5">
                 <div class="jumbotron p-5 rounded-lg m-3">
                     <h2>Search for a book?</h2>
-                    <div class="input-group">
-                        <input class="form-control mb-0" placeholder="Search for a book" type="search">
-                        <button class="btn btn-outline-primary btn-lg " type="submit">Search</button>
-                    </div>
+                    <form action="{{ url_for('search_book') }}" method="POST">
+                        <div class="input-group">
+                            <input class="form-control mb-0" placeholder="Search for a book" type="text" name="searchQuery">
+                            <button class="btn btn-outline-primary btn-lg " type="submit">Search</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
