@@ -1,10 +1,11 @@
-from crypt import methods
 import os
+import json
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for, jsonify)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from bson import json_util
 from bson.json_util import dumps, loads
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
@@ -38,11 +39,38 @@ def contactpage():
     return render_template("contact.html")
 
 
+@app.route('/search_book', methods=["GET", "POST"])
+def search_book():
+    """
+    Search mongo.books by using query
+    """
+    if request.method == "POST":
+        search_query = request.form.get("searchQuery")
+        if not search_query:
+            return redirect(url_for("librarypage"))
+        
+        queried = mongo.db.books.aggregate([{
+            "$search": {
+                'index': 'searchBooks',
+                'text': {
+                    'path': ["bookName", "bookDesc"],
+                    'query': search_query,
+                },
+                'highlight': {"path": "bookName"},
+            }
+        }])
+
+        return render_template("library.html", books=queried, query_word=search_query)
+
+    return redirect(url_for("librarypage"))
+
+
 @app.route('/library')
 def librarypage():
     """
     Returns library page
     """
+    print(mongo.db.books.find())
     return render_template("library.html", books=mongo.db.books.find())
 
 
