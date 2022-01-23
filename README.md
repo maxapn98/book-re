@@ -22,19 +22,21 @@ The site’s owner goals:
 
 ### Scope Plane
 The features that the website should include:
-- [] Database cluster for books.
+- [x] Database cluster for books.
 - [x] Database with user accounts.
 - [x] Registration form.
 - [x] Login form.
 - [x] Landing page.
-- [] Library page.
-- [] User page.
+- [x] Library page.
+- [x] User page.
 - [x] Contact page.
-- [] User book review input form.
-- [] Ability to create new review.
-- [] Ability to edit and update review.
-- [] Ability to read reviews.
-- [] Ability to delete review.
+- [x] User book review input form.
+- [x] Ability to logout from profile page.
+- [x] Ability to create new review.
+- [x] Ability to edit and update review.
+- [x] Ability to read reviews.
+- [x] Ability to delete review.
+- [x] Ability to add book in library.
 
 ### Structure Plane
 The information architutre:
@@ -76,12 +78,55 @@ The site will conatin 7 pages:
 Website color pallete:
 
 ![review site color pallete](assets/img/book-review-colorpallete.png)
+### Mockups
+- Mockups were created using Adobe Xd
 
+### Testing
 
+- All navigation links have been test mobile, tablet, destop.
+- Search bar on home page is test, search for a book in librery.
+- All CRUD operation tested.
+- Register page tested.
+- Login/Logout tested.
+- Contact page tested.
 
+### Testing User Stories
+#### All users are available to :
+- Use "search" on home page.
+- Browse library page, and use button "Read more", and read reviews
+- Use contact page
+- And register
+#### Only registered users are available to :
+- Login in their account
+- Add books in library
+- Edit books from library
+- Delete books form library
+- Write review
+- Edit review
+- Delete review
+- View a profile page
 
+### Validation
+- [x] Html validation on each page using (https://validator.w3.org/) button errors found on Contact page and Home page. 
+- [x] Css validation using (https://jigsaw.w3.org/css-validator/) no Errors:
+![css validator](assets/img/js-no-errors.PNG)
+- [x] JS validation using (https://beautifytools.com/javascript-validator.php) no errors found.
+![js validator](assets/img/js-no-errors.PNG)
+- [x] Autoprefix css
+- [x] Python validation using (https://extendsclass.com/python-tester.html) no syntax errors found.
+![pytohn validator](assets/img/python-no-errors.PNG)
 
+### Deployment
 
+- In terminal window type, pip3 freeze -- local > requirements.txt. (The file is needed for Heroku to know which filed to install.)
+- Go on Heroku website and 'Create new app'
+- Then set up deployment method 'Github.
+- Search for repository to connect with it, and connect with it.
+- Go to settings and then Config Vars  then set up key, values from env.py(IP, PORT, SECRET_KEY, MONGO_URI, MONGO_DBNAME).
+- Then update requirements.txt and create Procfile.
+- Finally enable automatic deployment
 
+### Credits
 
- 
+- Bootstrap
+- Login/Register page from "Mini-project" lessions.
