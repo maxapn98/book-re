@@ -51,7 +51,7 @@ def add_book():
     """
     Returns add_book page
     """
-    
+
     if request.method == "POST":
         new_book = {
             "bookName": request.form.get("bookName").lower(),
@@ -127,16 +127,22 @@ def add_book_review(book_id):
 
 @app.route("/delete_book_review/<review_id>", methods=["POST", "GET"])
 def delete_book_review(review_id):
+    """
+    Delete book review
+    """
     user_id = ObjectId(session['user']['_id'])
     review = mongo.db.reviews.find_one({'_id': ObjectId(review_id)})
     if user_id == review["_user_id"]:
         mongo.db.reviews.delete_one(review)
-    
+
     return redirect(url_for('book_page', book_id=review["_book_id"]))
 
 
 @app.route("/update_book_review/<review_id>", methods=["GET", "POST"])
 def update_book_review(review_id):
+    """
+    Update book review
+    """
     user_id = ObjectId(session['user']['_id'])
     review = mongo.db.reviews.find_one({'_id': ObjectId(review_id)})
     if user_id == review["_user_id"] and request.method == "GET":
@@ -146,24 +152,30 @@ def update_book_review(review_id):
         review["context"] = request.form.get("reviewText")
         mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$set": review})
         return redirect(url_for("book_page", book_id=review["_book_id"]))
-    
+
     return redirect(url_for("book_page", book_id=review["_book_id"]))
     
 
 
 @app.route('/profile/<username>', methods=["GET", "POST"])
 def profilepage(username):
+    """
+    Profile page functionality
+    """
     user = mongo.db.users.find_one({"_id": ObjectId(session["user"]["_id"])})
     del user['password']
 
     if session['user']:
         return render_template("profile.html",user=user)
-        
+
     return redirect(url_for('login'))
 
 
 @app.route('/logout')
 def logout():
+    """
+    Logout functionality
+    """
     flash("You have been logged out")
     session.pop('user')
     return redirect(url_for("loginpage"))
@@ -171,6 +183,9 @@ def logout():
 
 @app.route('/login', methods=["GET", "POST"])
 def loginpage():
+    """
+    Login page and login functionality
+    """
     if request.method == "POST":
         # check if username exists in db
         existing_user = mongo.db.users.find_one({"username": request.form.get("username").lower()})
@@ -199,6 +214,9 @@ def loginpage():
 
 @app.route("/register", methods=["GET", "POST"])
 def registerpage():
+    """
+    Register page functionality
+    """
     if request.method == "POST":
         # check if username already exists in db
         existing_user = mongo.db.users.find_one({"username": request.form.get("username").lower()})
