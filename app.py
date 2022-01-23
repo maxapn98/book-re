@@ -1,11 +1,10 @@
 import os
-import json
+from functools import wraps
 from flask import (
     Flask, flash, render_template,
-    redirect, request, session, url_for, jsonify)
+    redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
-from bson import json_util
 from bson.json_util import dumps, loads
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
@@ -21,6 +20,14 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 
 mongo = PyMongo(app)
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if session.get('user') is None:
+            return redirect('/login',code=302)
+        return f(*args, **kwargs)
+    return decorated_function
 
 
 @app.route('/')
@@ -75,6 +82,7 @@ def librarypage():
 
 
 @app.route("/add_book", methods=["GET", "POST"])
+@login_required
 def add_book():
     """
     Returns add_book page
@@ -93,6 +101,7 @@ def add_book():
 
 
 @app.route("/delete_book/<book_id>", methods=["GET","POST"])
+@login_required
 def delete_book(book_id):
     """
     Delete book from mongoDB
@@ -102,6 +111,7 @@ def delete_book(book_id):
 
 
 @app.route("/update_book/<book_id>", methods=["GET", "POST"])
+@login_required
 def update_book(book_id):
     """
     Update book information
@@ -136,6 +146,7 @@ def book_page(book_id):
 
 
 @app.route("/add_book_review/<book_id>", methods=["POST", "GET"])
+@login_required
 def add_book_review(book_id):
     if request.method == "POST":
         user = session['user']
@@ -154,6 +165,7 @@ def add_book_review(book_id):
 
 
 @app.route("/delete_book_review/<review_id>", methods=["POST", "GET"])
+@login_required
 def delete_book_review(review_id):
     """
     Delete book review
@@ -167,6 +179,7 @@ def delete_book_review(review_id):
 
 
 @app.route("/update_book_review/<review_id>", methods=["GET", "POST"])
+@login_required
 def update_book_review(review_id):
     """
     Update book review
@@ -186,6 +199,7 @@ def update_book_review(review_id):
 
 
 @app.route('/profile/<username>', methods=["GET", "POST"])
+@login_required
 def profilepage(username):
     """
     Profile page functionality
@@ -200,6 +214,7 @@ def profilepage(username):
 
 
 @app.route('/logout')
+@login_required
 def logout():
     """
     Logout functionality
