@@ -208,7 +208,12 @@ def profilepage(username):
     del user['password']
 
     if session['user']:
-        return render_template("profile.html",user=user)
+        reviews = mongo.db.reviews.find({"_user_id": ObjectId(session["user"]["_id"])})
+        books = []
+        for review in reviews:
+            books.append(mongo.db.books.find_one({"_id": ObjectId(review["_book_id"])})) 
+        
+        return render_template("profile.html",user=user, books=books)
 
     return redirect(url_for('login'))
 

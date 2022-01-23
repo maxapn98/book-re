@@ -204,3 +204,11 @@ textarea{
     border-radius: 0.25rem;
     transition: box-shadow .15s ease-in-out;
 }
+
+.profile-wrapper {
+    min-height: 100vh;
+    background-size: cover;
+    background-image: url("https://cdn.pixabay.com/photo/2021/01/21/16/49/books-5937823_960_720.jpg");
+    position: relative;
+    background-position: right;
+}
