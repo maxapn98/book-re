@@ -21,11 +21,12 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
+
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if session.get('user') is None:
-            return redirect('/login',code=302)
+            return redirect('/login', code=302)
         return f(*args, **kwargs)
     return decorated_function
 
@@ -67,7 +68,8 @@ def search_book():
             }
         }])
 
-        return render_template("library.html", books=queried, query_word=search_query)
+        return render_template(
+            "library.html", books=queried, query_word=search_query)
 
     return redirect(url_for("librarypage"))
 
@@ -100,7 +102,7 @@ def add_book():
     return render_template("add-book.html")
 
 
-@app.route("/delete_book/<book_id>", methods=["GET","POST"])
+@app.route("/delete_book/<book_id>", methods=["GET", "POST"])
 @login_required
 def delete_book(book_id):
     """
@@ -123,7 +125,8 @@ def update_book(book_id):
             "bookDesc": request.form.get("bookDesc"),
             }
 
-        mongo.db.books.update_one({"_id": ObjectId(book_id)}, {"$set": updated_book})
+        mongo.db.books.update_one(
+            {"_id": ObjectId(book_id)}, {"$set": updated_book})
         return redirect(url_for("librarypage"))
 
     book = mongo.db.books.find_one({"_id": ObjectId(book_id)})
@@ -138,11 +141,13 @@ def book_page(book_id):
     book_reviews = mongo.db.reviews.find({"_book_id": ObjectId(book_id)})
     book = mongo.db.books.find_one({"_id": ObjectId(book_id)})
     if session.get('user'):
-        user = mongo.db.users.find_one({"_id": ObjectId(session['user']["_id"])})
+        user = mongo.db.users.find_one(
+            {"_id": ObjectId(session['user']["_id"])})
         del user["password"]
     else:
         user = None
-    return render_template('book-page.html', book=book, reviews=book_reviews, user=user)
+    return render_template(
+        'book-page.html', book=book, reviews=book_reviews, user=user)
 
 
 @app.route("/add_book_review/<book_id>", methods=["POST", "GET"])
@@ -191,11 +196,11 @@ def update_book_review(review_id):
 
     if user_id == review["_user_id"] and request.method == "POST":
         review["context"] = request.form.get("reviewText")
-        mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$set": review})
+        mongo.db.reviews.update_one(
+            {"_id": ObjectId(review_id)}, {"$set": review})
         return redirect(url_for("book_page", book_id=review["_book_id"]))
 
-    return redirect(url_for("book_page", book_id=review["_book_id"]))
-    
+    return redirect(url_for("book_page", book_id=review["_book_id"]))  
 
 
 @app.route('/profile/<username>', methods=["GET", "POST"])
@@ -208,12 +213,14 @@ def profilepage(username):
     del user['password']
 
     if session['user']:
-        reviews = mongo.db.reviews.find({"_user_id": ObjectId(session["user"]["_id"])})
+        reviews = mongo.db.reviews.find(
+            {"_user_id": ObjectId(session["user"]["_id"])})
         books = []
         for review in reviews:
-            books.append(mongo.db.books.find_one({"_id": ObjectId(review["_book_id"])})) 
+            books.append(mongo.db.books.find_one(
+                {"_id": ObjectId(review["_book_id"])})) 
         
-        return render_template("profile.html",user=user, books=books)
+        return render_template("profile.html", user=user, books=books)
 
     return redirect(url_for('login'))
 
@@ -236,7 +243,9 @@ def loginpage():
     """
     if request.method == "POST":
         # check if username exists in db
-        existing_user = mongo.db.users.find_one({"username": request.form.get("username").lower()})
+        existing_user = mongo.db.users.find_one({
+            "username": request.form.get("username").lower()
+            })
 
         if existing_user:
             # ensure hashed password matches user input
@@ -245,7 +254,8 @@ def loginpage():
                     existing_user["_id"] = str(existing_user["_id"])
                     session["user"] = loads(dumps(existing_user))
                     flash("Welcome, {}".format(request.form.get("username")))
-                    return redirect(url_for('profilepage', username=session["user"]))
+                    return redirect(
+                        url_for('profilepage', username=session["user"]))
             else:
                 # invalid password match
                 flash("Incorrect Username and/or Password")
@@ -259,7 +269,6 @@ def loginpage():
     return render_template("login.html")
 
 
-
 @app.route("/register", methods=["GET", "POST"])
 def registerpage():
     """
@@ -267,7 +276,8 @@ def registerpage():
     """
     if request.method == "POST":
         # check if username already exists in db
-        existing_user = mongo.db.users.find_one({"username": request.form.get("username").lower()})
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
 
         if existing_user:
             flash("Username already exists")
@@ -293,4 +303,4 @@ def registerpage():
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=True)
+            debug=False)
