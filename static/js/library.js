@@ -6,7 +6,7 @@ window.addEventListener("DOMContentLoaded", function() {
     let editButtons = document.getElementsByClassName("card-edit-button");
 
     editToggler.addEventListener("click", function(){
-        editMode = !editMode
+        editMode = !editMode;
 
         if (editMode === true) {
             for (let i = 0; i < viewButtons.length; i++){
@@ -14,11 +14,11 @@ window.addEventListener("DOMContentLoaded", function() {
             }
 
             for(let i = 0; i < editButtons.length; i++){
-                editButtons[i].classList.remove("d-none")
+                editButtons[i].classList.remove("d-none");
             }
         } else {
             for(let i = 0; i < editButtons.length; i++){
-                editButtons[i].classList.add("d-none")
+                editButtons[i].classList.add("d-none");
             }
 
             for (let i = 0; i < viewButtons.length; i++){
